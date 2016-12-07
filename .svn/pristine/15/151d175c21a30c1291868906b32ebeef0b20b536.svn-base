@@ -1,0 +1,60 @@
+package com.project.webapp.controllertest;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+
+import com.project.webapp.controller.UserDao;
+import com.project.webapp.controller.UserService;
+import com.project.webapp.domain.User;
+
+public class UserDaoTest {
+
+	// @Mock
+	// OrderDAO dao;
+	//
+	// @Before
+	// public void setUp() {
+	// dao = mock(OrderDAO.class);
+	// }
+	//
+	// @Test
+	// public void testPlaceOrder() {
+	// //Arrange
+	// OrderBusinessObjectImpl bo = new OrderBusinessObjectImpl();
+	// bo.setDao(dao);
+	// //Act
+	// when(bo.placeOrder()).thenReturn(true);
+	// //Assert
+	// assertTrue(bo.placeOrder());
+	// verify(dao).placeOrder();
+	// }
+
+	private UserDao userDao;
+
+	@Mock
+	private UserService userService;
+
+	@Before
+	public void setUp() {
+		userService = mock(UserService.class);
+	}
+
+	@Test
+	public void testSave() {
+		// //Arrange
+		// UserDao userDao = new UserDao();
+		// User user = new User("Godcrying", "Kai", "Zhang",
+		// "jackson.zhang1@hotmail.com", 0, "211032@ZKztx", "211032@ZKztx", "",
+		// favouriteteam)
+		// //Act
+		// when(userDao.save(object);)
+		// //Assert
+	}
+
+}

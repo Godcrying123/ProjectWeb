@@ -1,0 +1,141 @@
+package com.project.webapp.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.project.webapp.domain.User;
+import com.project.webapp.domain.UserMatches;
+import com.project.webapp.model.Matches;
+
+/**
+ * Servlet implementation class LoginController
+ */
+public class LoginController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private UserDao datadao;
+	private static String userNameValidate = null;
+	private static String emailValidate = null;
+	private UserDao userDao;
+	private User user;
+	private static MatchesController matchesController;
+	private List<Matches> matchList;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginController() {
+		super();
+		this.userDao = new UserDao();
+		this.user = new User();
+		this.matchesController = new MatchesController();
+		this.matchList = new ArrayList<Matches>();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ")
+				.append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// Login Form Controller
+		UserDao datadao = new UserDao();
+		String username = request.getParameter("usernamelog");
+		String emaillog = request.getParameter("emaillog");
+		String passwordlog = request.getParameter("passwordlog");
+		PrintWriter out = response.getWriter();
+		boolean isPresent = datadao.validate(username, emaillog, passwordlog);
+		if (isPresent == true) {
+			this.user = (User) userDao.search(emaillog);
+			setUser(user);
+			response.sendRedirect("HomePage.jsp");
+			setUserNameValidate(username);
+			System.out.println(userNameValidate);
+			emailValidate = emaillog;
+			setEmailValidate(emaillog);
+			System.out.println(emailValidate);
+		} else {
+			response.sendRedirect("registraction.jsp");
+		}
+	}
+
+	public void setUserNameValidate(String userNameValidate) {
+		this.userNameValidate = userNameValidate;
+	}
+
+	public void setEmailValidate(String emailValidate) {
+		this.emailValidate = emailValidate;
+	}
+
+	public String getUserNameValidate() {
+		return userNameValidate;
+	}
+
+	public String getEmailValidate() {
+		return emailValidate;
+	}
+
+	// Invalid Input
+	public static double validInputValue(String userInputAmount) {
+		double value1 = 0;
+		// cannot be letters
+		try {
+			value1 = Double.parseDouble(userInputAmount);
+		} catch (NumberFormatException ignore) {
+			throw ignore;
+		}
+		// cannot be negative
+		if (value1 < 0)
+			throw (new NumberFormatException());
+		// cannot be infinite
+		if (value1 == Double.POSITIVE_INFINITY)
+			throw (new NumberFormatException());
+		if (value1 == Double.NEGATIVE_INFINITY)
+			throw (new NumberFormatException());
+		return value1;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Matches> getMatchList() {
+		List<UserMatches> betList = this.user.getBettingList();
+		if (betList != null) {
+			for (UserMatches userMatches : betList) {
+				this.matchList.add(matchesController.searchMatches(userMatches
+						.getMatches().getMatch_id()));
+			}
+		}
+
+		return matchList;
+	}
+
+	public static void main(String[] args) {
+		LoginController loginController = new LoginController();
+		System.out.println(loginController.getUser());
+	}
+
+}

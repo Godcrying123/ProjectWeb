@@ -1,0 +1,33 @@
+package com.project.webapp.modeltest;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.project.webapp.model.Matches;
+
+public class MatchesTest {
+
+	@Before
+	public void setUp() {
+		System.out.println("The Test starts!!");
+	}
+
+	@Test
+	public void getterAndsetterTest() {
+		//Arrange
+		Matches matches = new Matches();
+		//Act
+		matches.setMatch_id(222);
+		matches.setHometeam(1);
+		matches.setAwayteam(2);
+		
+		//Assert
+	}
+
+	@After
+	public void done() {
+		System.out.println("The Test has done!!");
+	}
+
+}

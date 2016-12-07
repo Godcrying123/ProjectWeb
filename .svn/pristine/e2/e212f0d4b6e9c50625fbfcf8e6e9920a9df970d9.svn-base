@@ -1,0 +1,20 @@
+package com.project.webapp.controller;
+
+import java.util.List;
+
+import com.project.webapp.domain.User;
+import com.project.webapp.domain.UserMatches;
+import com.project.webapp.model.Matches;
+
+public interface BetService {
+
+	public UserMatches betMatch(String emailaddress, int match_id, double betamount,
+			int bet);
+
+	public void betCancel(String emailaddress, int match_id);
+
+	public double rewardGet(String emailaddress);
+
+	public List<UserMatches> userMatchSearch(String emailaddress);
+
+}

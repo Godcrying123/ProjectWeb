@@ -1,0 +1,33 @@
+<%@page import="com.project.webapp.controller.UserDao"%>
+<%@page import="com.mysql.jdbc.PreparedStatement"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.mysql.jdbc.*"%>
+<%@ page import="com.project.webapp.domain.User"%>
+<%@ page import="javax.persistence.EntityManager"%>
+<%@ page import="javax.persistence.EntityManagerFactory"%>
+<%@ page import="javax.persistence.Persistence"%>
+<%@ page import="javax.persistence.Query"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="">
+		<table border="2">
+
+			<div>
+				<tr>
+					<td>UserName</td>
+					<td>Name</td>
+					<td>Surname</td>
+					<td>Email Address</td>
+					<td>Account Amount</td>
+				<tr />
+			</div>
+			</form>
+</body>
+</html>

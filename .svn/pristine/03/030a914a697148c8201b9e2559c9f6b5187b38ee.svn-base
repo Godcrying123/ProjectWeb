@@ -1,0 +1,122 @@
+package com.project.webapp.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.project.webapp.dao.Datadao;
+import com.project.webapp.domain.User;
+import com.project.webapp.domain.UserMatches;
+import com.project.webapp.model.Matches;
+
+public class BetController implements BetService {
+
+	private Datadao datadao;
+	private EntityManager em;
+
+	public BetController() {
+		em = datadao.getEm();
+		this.datadao = datadao;
+	}
+
+	public void save(Object object) {
+		em.getTransaction().begin();
+		em.persist(object);
+		em.getTransaction().commit();
+	}
+
+	public void betMatch(String emailaddress, int match_id, double betamount,
+			int bet) {
+
+		UserDao userDao = new UserDao();
+		MatchesController matchesController = new MatchesController();
+		User user = (User) userDao.search(emailaddress);
+		Matches matches = matchesController.searchMatches(match_id);
+		System.out.println(matches);
+		UserMatches betOrder = new UserMatches(betamount, bet);
+		matches.addOrder(betOrder);
+		user.addBettingOrder(betOrder);
+		save(user);
+		save(betOrder);
+		save(matches);
+	}
+
+	public void betCancel(String emailaddress, int match_id) {
+		UserDao userDao = new UserDao();
+		MatchesController matchesController = new MatchesController();
+		User user = (User) userDao.search(emailaddress);
+		Matches matches = matchesController.searchMatches(match_id);
+
+		try {
+			List<UserMatches> betList = new ArrayList<UserMatches>();
+			betList = user.getBettingList();
+		} catch (javax.persistence.NoResultException e) {
+			System.out.println("Fail to find the User Matches table");
+		}
+
+	}
+
+	public double rewardGet(String emailaddress) {
+		Double rewards = 0.0d;
+		UserDao userDao = new UserDao();
+		MatchesController matchesController = new MatchesController();
+		User user = (User) userDao.search(emailaddress);
+
+		List<UserMatches> betList = new ArrayList<UserMatches>();
+		betList = userMatchSearch(emailaddress);
+		for (UserMatches userMatches : betList) {
+			Matches matches = matchesController.searchMatches(userMatches
+					.getMatches().getMatch_id());
+			switch (userMatches.getBet()) {
+			case 1:
+				if (matches.getHomescore() > matches.getAwayscore()) {
+					rewards = rewards + userMatches.getBetAmount()
+							* matches.getHomeWinRate();
+				}
+				break;
+			case 2:
+				if (matches.getHomescore() == matches.getAwayscore()) {
+					rewards = rewards + userMatches.getBetAmount()
+							* matches.getDrawRate();
+
+				}
+				break;
+			default:
+				if (matches.getHomescore() < matches.getAwayscore()) {
+					rewards = rewards + userMatches.getBetAmount()
+							* matches.getAwayWinRate();
+				}
+				break;
+			}
+		}
+		return rewards;
+	}
+
+	public List<UserMatches> userMatchSearch(String emailaddress) {
+		UserDao userdao = new UserDao();
+		User user = (User) userdao.search(emailaddress);
+		try {
+			List<UserMatches> betList = new ArrayList<UserMatches>();
+			betList = user.getBettingList();
+			return betList;
+		} catch (javax.persistence.NoResultException e) {
+			System.out.println("Fail to find the User Matches table");
+			return null;
+		}
+	}
+
+	public static void main(String[] args) {
+
+		BetController betController = new BetController();
+		//betController.betMatch("jackson.zhang1@hotmail.com", 218, 100, 1);
+		betController.rewardGet("jackson.zhang1@hotmail.com");
+		BetController betController1 = new BetController();
+		List<UserMatches> betMatchList = betController1
+				.userMatchSearch("jackson.zhang1@hotmail.com");
+		for (UserMatches userMatches : betMatchList) {
+			System.out.println(userMatches);
+		}
+	}
+}
