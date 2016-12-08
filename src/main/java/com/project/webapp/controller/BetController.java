@@ -22,7 +22,6 @@ public class BetController implements BetService {
 
 	public BetController() {
 		this.em = datadao.getEm();
-		this.datadao = datadao;
 		this.userDao = new UserDao();
 		this.matchesController = new MatchesController();
 		this.user = new User();

@@ -27,8 +27,6 @@ public class BetMatchControllerTest {
 
 	private BetMatchController betMatchController;
 
-	private User user;
-
 	@Mock
 	HttpServletRequest mockRequest;
 	@Mock
@@ -39,12 +37,15 @@ public class BetMatchControllerTest {
 	UserDao mockUserDao;
 	@Mock
 	BetController mockBetController;
+	@Mock
+	User mockUser;
 
 	@Before
 	public void setUp() {
 		System.out.println("The Test starts!!");
-		betMatchController = new BetMatchController();
 		MockitoAnnotations.initMocks(this);
+		betMatchController = new BetMatchController(mockBetController,
+				mockRequest, mockResponse, mockUserDao);
 
 	}
 
@@ -54,8 +55,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam1")).thenReturn("1");
 		when(mockRequest.getParameter("bet1")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -69,8 +73,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam2")).thenReturn("1");
 		when(mockRequest.getParameter("bet2")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -84,8 +91,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam3")).thenReturn("1");
 		when(mockRequest.getParameter("bet3")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -99,8 +109,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam4")).thenReturn("1");
 		when(mockRequest.getParameter("bet4")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -114,8 +127,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam5")).thenReturn("1");
 		when(mockRequest.getParameter("bet5")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -129,8 +145,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam6")).thenReturn("1");
 		when(mockRequest.getParameter("bet6")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -144,8 +163,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam7")).thenReturn("1");
 		when(mockRequest.getParameter("bet7")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -159,8 +181,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam8")).thenReturn("1");
 		when(mockRequest.getParameter("bet8")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -174,8 +199,11 @@ public class BetMatchControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam9")).thenReturn("1");
 		when(mockRequest.getParameter("bet9")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn(
+				"jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert
@@ -184,14 +212,14 @@ public class BetMatchControllerTest {
 	}
 
 	@Test
-	public void do_Post_Bet10_method_Test() throws ServletException,
-			IOException {
+	public void do_Post_Bet10_method_Test() throws ServletException, IOException {
 		// Arrange
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betTeam10")).thenReturn("1");
 		when(mockRequest.getParameter("bet10")).thenReturn("100");
-		when(mockRequest.getSession().getAttribute("emailValidate"))
-				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockRequest.getSession()).thenReturn(mockSession);
+		when(mockSession.getAttribute("emailValidate")).thenReturn("jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(mockUser);
 		// Act
 		betMatchController.doPost(mockRequest, mockResponse);
 		// Assert

@@ -21,23 +21,23 @@ public class MatchesController implements MatchesService {
 	private Datadao datadao;
 	private EntityManager em;
 	private MatchSchedule schedulematch;
-	private UserDao dataService;
+	private UserDao userDao;
 	private String[] startTimes = new String[7];
 
 	public MatchesController() {
 		this.em = datadao.getEm();
-		this.dataService = dataService;
+		this.userDao = userDao;
 		this.schedulematch = schedulematch;
 		this.startTimes = startTimes;
 
 	}
 
 	public MatchesController(Datadao datadao, EntityManager em,
-			MatchSchedule matchSchedule, UserDao dataService) {
+			MatchSchedule matchSchedule, UserDao userDao) {
 		this.datadao = datadao;
 		this.em = em;
 		this.schedulematch = schedulematch;
-		this.dataService = dataService;
+		this.userDao = userDao;
 	}
 
 	public String[] timeSchedule() {
@@ -227,17 +227,17 @@ public class MatchesController implements MatchesService {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// MatchesController matchesController = new MatchesController();
-	// matchesController.matchSchedule(20);
-	// List<Matches> matchesList = matchesController.searchMatchList(20);
-	// for (Matches matches : matchesList) {
-	// System.out.println(matches);
-	// }
-	// List<Team> teamList = matchesController.TeamRank();
-	// for (Team team : teamList) {
-	// System.out.println(team.getTeamname()+" "+team.getPoints());
-	// }
-	// }
+	public static void main(String[] args) {
+		MatchesController matchesController = new MatchesController();
+		matchesController.matchSchedule(20);
+		// List<Matches> matchesList = matchesController.searchMatchList(20);
+		// for (Matches matches : matchesList) {
+		// System.out.println(matches);
+		// }
+		// List<Team> teamList = matchesController.TeamRank();
+		// for (Team team : teamList) {
+		// System.out.println(team.getTeamname()+" "+team.getPoints());
+		// }
+	}
 
 }

@@ -54,7 +54,8 @@
 	<div class="container-fluid">
 
 		<!-- Left Column -->
-		<div class="col-sm-12">
+		<div class="col-sm-
+		12">
 
 			<div class="row">
 				<article class="col-xs-12">

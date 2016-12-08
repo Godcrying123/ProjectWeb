@@ -2,12 +2,12 @@ package com.project.webapp.controllertest;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +27,6 @@ import com.project.webapp.model.Matches;
 public class BetControllerTest {
 
 	private BetService betController;
-	private User user;
-	private Matches matches;
 
 	@Mock
 	EntityManagerFactory mockEmf;
@@ -48,20 +46,23 @@ public class BetControllerTest {
 	Datadao mockDao;
 	@Mock
 	User mockUser;
+	@Mock
+	UserMatches mockUserMatches;
 
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("The Test Starts!!");
 		MockitoAnnotations.initMocks(this);
-		betController = new BetController();
 		betController = new BetController(mockEm, mockDao, mockUserDao,
 				mockMatchController);
+		Mockito.when(mockEm.getTransaction()).thenReturn(mockTransaction);
+
 	}
 
 	@Test
 	public void save_method_test() {
 		// Arrange
-		Mockito.when(mockEm.getTransaction()).thenReturn(mockTransaction);
+
 		// Act
 		betController.save(mockUser);
 		// Assert
@@ -74,9 +75,13 @@ public class BetControllerTest {
 	@Test
 	public void betMatch_method_Test() {
 		// Arrange
-		UserDao userDao = new UserDao();
-		MatchesController matchesController = new MatchesController();
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(
+				mockUser);
+		when(mockMatchController.searchMatchesbyId(anyInt())).thenReturn(
+				mockMatches);
 		// Act
+		betController.betMatch("jackson.zhang1@hotmail.com", 211, 100.0d, 1);
+		// Assert
 
 	}
 

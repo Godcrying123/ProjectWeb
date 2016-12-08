@@ -120,33 +120,21 @@
 				<div class="carousel-inner" role="listbox">
 					<div class="carousel-item active">
 						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%201" alt="">
+							src="/ProjectWeb/images/index_1.jpg" alt="">
 						</a>
-						<div class="carousel-caption">
-							<h3>Dramatically Engage</h3>
-							<p>Objectively innovate empowered manufactured products
-								whereas parallel platforms.</p>
-						</div>
+						<div class="carousel-caption"></div>
 					</div>
 					<div class="carousel-item">
 						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%202" alt="">
+							src="/ProjectWeb/images/index_2.jpg" alt="">
 						</a>
-						<div class="carousel-caption">
-							<h3>Efficiently Unleash</h3>
-							<p>Dramatically maintain clicks-and-mortar solutions without
-								functional solutions.</p>
-						</div>
+						<div class="carousel-caption"></div>
 					</div>
 					<div class="carousel-item">
 						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%203" alt="">
+							src="/ProjectWeb/images/index_3.jpg" alt="">
 						</a>
-						<div class="carousel-caption">
-							<h3>Proactively Pontificate</h3>
-							<p>Holistically pontificate installed base portals after
-								maintainable products.</p>
-						</div>
+						<div class="carousel-caption"></div>
 					</div>
 				</div>
 				<a class="left carousel-control" href="#side-carousel" role="button"

@@ -52,7 +52,7 @@ public class LoginControllerTest {
 
 
 	@Test
-	public void validate_method_Test() throws ServletException, IOException {
+	public void doPost_failure_method_Test() throws ServletException, IOException {
 		//Arrange
 		Mockito.when(mockRequest.getParameter("usernamelog")).thenReturn("someone");
 		Mockito.when(mockRequest.getParameter("emaillog")).thenReturn("someone@example.com");
@@ -60,7 +60,23 @@ public class LoginControllerTest {
 		//Act
 		loginController.doPost(mockRequest, mockResponse);
 		//Assert
-		verify(mockResponse).sendRedirect("registraction.jsp");
+		verify(mockResponse).sendRedirect("errorinformation.jsp");
+		
+	}
+	
+	
+	@Test
+	public void doPost_success_method_Test() throws ServletException, IOException {
+		//Arrange
+		Mockito.when(mockRequest.getParameter("usernamelog")).thenReturn("someone");
+		Mockito.when(mockRequest.getParameter("emaillog")).thenReturn("someone@example.com");
+		Mockito.when(mockRequest.getParameter("passwordlog")).thenReturn("211032@ZKztx");
+		Mockito.when(mockUserDao.validate("someone", "someone@example.com", "211032@ZKztx")).thenReturn(true);
+		Mockito.when(mockUserDao.search("someone@example.com")).thenReturn(mockUser);
+		//Act
+		loginController.doPost(mockRequest, mockResponse);
+		//Assert
+		verify(mockResponse).sendRedirect("HomePage.jsp");
 		
 	}
 	

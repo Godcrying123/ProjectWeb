@@ -15,18 +15,25 @@
 	List<Team> teamList = matchesController.TeamRank();
 	StringBuffer teamRank = new StringBuffer();
 	String bet = "";
-	bet = bet + "<br/>" + "<hr>";
+	
 	for (Team team : teamList) {
+		bet = bet + "<div class=\"text-xs-center\" id=\"progress-caption-1\">";
 		String teamName = team.getTeamname();
 		String teamPoints = String.valueOf(team.getPoints());
-		bet = bet + teamName + "		" + teamPoints;
-		bet = bet + "<br/>" + "<hr>";
+		bet = bet + teamName + "&hellip; " + teamPoints;
+		bet = bet + "<div>";
+		bet = bet + "<progress class=\"progress progress-success\" value=\"";
+		bet = bet + teamPoints+"\" max=\"60\" aria-describedby=\"progress-caption-1\"></progress>";
 		teamRank.append(bet);
 		bet="";
 
 	}
+	
 	session.setAttribute("teamRank", teamRank);
 %>
+
+
+
 
 <html lang="en">
 <head>
@@ -78,18 +85,19 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="#">Your Informations</a> <a
 							class="dropdown-item" href="#">Update Informations</a> <a
-							class="dropdown-item" href="#">Bet Order Management</a> <a
-							class="dropdown-item" href="#">Top Up Your Account</a>
+							class="dropdown-item" href="BetHistory.jsp">Bet Order
+							Management</a> <a class="dropdown-item" href="#">Top Up Your
+							Account</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Popular Team </a>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Manchester United</a> <a
-							class="dropdown-item" href="#">Manchester City</a> <a
-							class="dropdown-item" href="#">Chelsea</a> <a
-							class="dropdown-item" href="#">Arsenal</a>
+						<a class="dropdown-item" href="Team.jsp">Manchester United</a> <a
+							class="dropdown-item" href="Team1.jsp">Manchester City</a> <a
+							class="dropdown-item" href="Team2.jsp">Chelsea</a> <a
+							class="dropdown-item" href="Team3.jsp">Arsenal</a>
 					</div></li>
 			</ul>
 			<!-- Search -->
@@ -106,82 +114,20 @@
 
 		<!-- Left Column -->
 		<!-- Center Column -->
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<!-- Articles -->
-			<div class="row">
-				<article class="col-xs-12">
-					<div class="card-block">
-						<h2>Team Ranks Points</h2>
-						<%=session.getAttribute("teamRank")%>
-					</div>
-				</article>
+			<div class="card">
+				<div class="card-header p-b-0">
+					<h5 class="card-title">
+						<i class="fa fa-tachometer" aria-hidden="true"></i> Team Points
+						Rank
+					</h5>
+					<%=session.getAttribute("teamRank")%>
+				</div>
+				<div class="card-block"></div>
 			</div>
 			<hr>
 		</div>
-		<!--/Center Column-->
-		<!--/Left Column -->
-		<!-- Right Column -->
-		<div class="col-sm-6">
-
-			<!-- Carousel -->
-			<h4>
-				<i class="fa fa-language" aria-hidden="true"></i> Welcome to BET250
-			</h4>
-			<div id="side-carousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#side-carousel" data-slide-to="0" class="active"></li>
-					<li data-target="#side-carousel" data-slide-to="1"></li>
-					<li data-target="#side-carousel" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="carousel-item active">
-						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%201" alt="">
-						</a>
-						<div class="carousel-caption">
-							<h3>Dramatically Engage</h3>
-							<p>Objectively innovate empowered manufactured products
-								whereas parallel platforms.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%202" alt="">
-						</a>
-						<div class="carousel-caption">
-							<h3>Efficiently Unleash</h3>
-							<p>Dramatically maintain clicks-and-mortar solutions without
-								functional solutions.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<a href="#"> <img class="img-responsive"
-							src="holder.js/400x480?bg=FF8C00&text=Image%203" alt="">
-						</a>
-						<div class="carousel-caption">
-							<h3>Proactively Pontificate</h3>
-							<p>Holistically pontificate installed base portals after
-								maintainable products.</p>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" href="#side-carousel" role="button"
-					data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#side-carousel"
-					role="button" data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-
-			<!-- Alert -->
-			<!-- Articles -->
-		</div>
-		<!--/Right Column-->
-
-
 
 
 	</div>

@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
 import com.project.webapp.controller.RegistractionController;
@@ -36,6 +37,9 @@ public class RegistrationControllerTest {
 	private HttpSession mockSession;
 	@Mock
 	private UserDao mockUserDao;
+	
+	
+	private User user;
 
 	@Before
 	public void setUp() {
@@ -59,7 +63,7 @@ public class RegistrationControllerTest {
 		// Act
 		rc.doPost(mockRequest, mockResponse);
 		// Assert
-		verify(mockResponse).getWriter();
+		verify(mockResponse).sendRedirect("HomePage.jsp");
 	}
 	
 	
@@ -72,11 +76,11 @@ public class RegistrationControllerTest {
 		Mockito.when(mockRequest.getParameter("email")).thenReturn("Some@example.com");
 		Mockito.when(mockRequest.getParameter("password")).thenReturn("211032@ZKztx");
 		Mockito.when(mockRequest.getParameter("confirmpassword")).thenReturn("5873214");
-		Mockito.when(mockRequest.getParameter("age")).thenReturn("16/02?2008");
+		Mockito.when(mockRequest.getParameter("age")).thenReturn("16/02/2010");
 		// Act
 		rc.doPost(mockRequest, mockResponse);
 		// Assert
-		verify(mockResponse).getWriter();
+		verify(mockResponse).sendRedirect("errorinformation.jsp");
 	}
 
 	@Test

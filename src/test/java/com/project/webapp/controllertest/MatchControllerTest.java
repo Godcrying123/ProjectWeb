@@ -31,26 +31,27 @@ import com.project.webapp.model.Matches;
 
 public class MatchControllerTest {
 
+	private MatchesService matchesController;
 	@Mock
-	EntityManagerFactory mockEmf;
+	private EntityManagerFactory mockEmf;
 	@Mock
-	EntityManager mockEm;
+	private EntityManager mockEm;
 	@Mock
-	EntityTransaction mockTransaction;
+	private EntityTransaction mockTransaction;
 	@Mock
-	User mockUser;
+	private User mockUser;
 	@Mock
-	Query mockQuery;
+	private Query mockQuery;
 	@Mock
-	Datadao mockDao;
+	private Datadao mockDao;
 	@Mock
-	UserDao mockUserDao;
+	private UserDao mockUserDao;
 	@Mock
-	MatchSchedule mockSchedule;
+	private MatchSchedule mockSchedule;
 	@Mock
-	Team mockTeam;
+	private Team mockTeam;
 
-	MatchesService matchesController;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -173,7 +174,7 @@ public class MatchControllerTest {
 		// Arrange
 
 		// Act
-
+		matchesController.pointsCalculator(1);
 		// Assert
 	}
 
@@ -182,7 +183,7 @@ public class MatchControllerTest {
 		// Arrange
 
 		// Act
-
+		matchesController.pointsCalculator(2);
 		// Assert
 	}
 

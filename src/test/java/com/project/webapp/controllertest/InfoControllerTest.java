@@ -1,6 +1,7 @@
 package com.project.webapp.controllertest;
 
 import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,6 +35,8 @@ public class InfoControllerTest {
 	HttpSession mockSession;
 	@Mock
 	UserDao mockUserDao;
+	@Mock
+	User mockUser;
 
 	@Before
 	public void setUp() throws Exception {
@@ -44,12 +47,13 @@ public class InfoControllerTest {
 	}
 
 	@Test
-	public void doPost_method_test() throws ServletException, IOException {
+	public void doPost_success_method_test() throws ServletException, IOException {
 		// Arrange
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockRequest.getParameter("betamount")).thenReturn("1000.0");
 		when(mockRequest.getSession().getAttribute("emailValidate"))
 				.thenReturn("jackson.zhang1@hotmail.com");
+		when(mockUserDao.search("jackson.zhang1@hotmail.com")).thenReturn(mockUser);
 		// Act
 		infoController.doPost(mockRequest, mockReponse);
 		// Assert

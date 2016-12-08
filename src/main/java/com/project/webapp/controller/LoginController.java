@@ -32,6 +32,7 @@ public class LoginController extends HttpServlet {
 	 */
 	public LoginController() {
 		super();
+		userDao = new UserDao();
 
 		// TODO Auto-generated constructor stub
 	}
@@ -56,7 +57,6 @@ public class LoginController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Login Form Controller
-		userDao = new UserDao();
 		String username = request.getParameter("usernamelog");
 		String emaillog = request.getParameter("emaillog");
 		String passwordlog = request.getParameter("passwordlog");

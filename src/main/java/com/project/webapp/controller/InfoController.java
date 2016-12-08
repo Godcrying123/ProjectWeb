@@ -25,10 +25,12 @@ public class InfoController extends HttpServlet {
 	 */
 	public InfoController() {
 		super();
+		this.userDao = new UserDao();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InfoController(HttpServletRequest request, HttpServletResponse response, UserDao userDao) {
+	public InfoController(HttpServletRequest request,
+			HttpServletResponse response, UserDao userDao) {
 		this.request = request;
 		this.response = response;
 		this.userDao = userDao;
@@ -46,8 +48,8 @@ public class InfoController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String email = (String) request.getSession().getAttribute("emailValidate");
-			userDao = new UserDao();
+			String email = (String) request.getSession().getAttribute(
+					"emailValidate");
 			Double amount = Double.valueOf(request.getParameter("betamount"));
 			user = (User) userDao.search(email);
 			Double TotalAmount = user.getAccount_Amount() + amount;

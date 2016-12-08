@@ -35,6 +35,7 @@ public class RegistractionController extends HttpServlet {
 	 */
 	public RegistractionController() {
 		super();
+		userDao = new UserDao();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -56,8 +57,7 @@ public class RegistractionController extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		userDao = new UserDao();
+
 		String username = request.getParameter("username");
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -83,22 +83,20 @@ public class RegistractionController extends HttpServlet {
 		LocalDate end = LocalDate.now();
 		int years = (int) ChronoUnit.YEARS.between(start, end);
 
-		try {
-			if (PasswordValidator(password, confirmpassword) && (years >= 18)
-					&& checkFormat) {
-				User user = new User(username, name, surname, email, 0.0d,
-						password, confirmpassword, years, favouriteteam);
-				userDao.save(user);
+		if (PasswordValidator(password, confirmpassword) && (years >= 18)
+				&& checkFormat) {
+			User user = new User(username, name, surname, email, 0.0d,
+					password, confirmpassword, years, favouriteteam);
+			userDao.save(user);
 
-				userNameRegister = username;
-				emailResgister = email;
+			userNameRegister = username;
+			emailResgister = email;
 
-				response.sendRedirect("HomePage.jsp");
-			}
-		} catch (Exception e) {
+			response.sendRedirect("HomePage.jsp");
+		} else {
 			System.out.println("Wrong information inputing");
 			response.sendRedirect("errorinformation.jsp");
-			e.printStackTrace();
+
 		}
 	}
 

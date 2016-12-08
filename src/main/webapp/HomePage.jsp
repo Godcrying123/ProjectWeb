@@ -16,7 +16,10 @@
 	MatchesController matchesController = new MatchesController();
 	String username = logController.getUserNameValidate();
 	String email = logController.getEmailValidate();
+	List<Matches> matchList1 = new ArrayList<Matches>();
 	UserDao userDao = new UserDao();
+	String[] betChoice = new String[1000];
+	Double[] betAmount = new Double[1000];
 
 	RegistractionController registerController = new RegistractionController();
 	String userRegister = registerController.getUserNameRegister();
@@ -39,7 +42,48 @@
 		emailUser = emailRegister;
 	}
 %>
+<%
+	User user = (User) userDao.search(emailUser);
+	List<UserMatches> betList =user.getBettingList();
+	
+	int ii = 1;
+	for (UserMatches betOrder : betList) {
+		matchList1.add(betOrder.getMatches());
+		betAmount[ii-1] = betOrder.getBetAmount();
+		if(betOrder.getBet()==1){
+		betChoice[ii-1] = "HomeTeam Win";
+		}else if(betOrder.getBet()==2){
+		betChoice[ii-1] = "Draw";	
+		}else{
+	betChoice[ii-1] = "AwayTeam Win";
+		}
+		ii=ii+1;
 
+	}
+	if (matchList1 != null) {
+		StringBuffer betHistory = new StringBuffer();
+		String bet = "";
+		int j = 1;
+		for (Matches matches : matchList1) {
+
+	bet = bet + "<br/><hr>";
+	
+	String homeTeam1 = matchesController.searchTeam(matches.getHometeam()).getTeamname();
+	String awayTeam1 = matchesController.searchTeam(matches.getAwayteam()).getTeamname();
+	bet = bet + "<a class=\"list-group-item list-group-item-action\">";
+	bet = bet  + "You bet "+"	"+betChoice[j-1]+"	"+String.valueOf(betAmount[j-1])+"	"+"for match";
+	bet = bet +"<br/>"+	homeTeam1 + "	" + "VS" + "	" + awayTeam1 + "	";
+	bet = bet + "<input type=\"button\" name=\"cancel" + String.valueOf(j) + "\"value=\"Cancel\""
+	+ "\"></a>";
+	bet = bet + "<hr>";
+	betHistory.append(bet);
+	j = j + 1;
+	bet = "";
+		}
+		betHistory.append("</div>");
+		session.setAttribute("matchHistory", betHistory);
+	}
+%>
 <%
 	int match_week = 20;
 	List<Matches> matchList = matchesController.searchMatchList(match_week);
@@ -125,8 +169,9 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="#">Your Informations</a> <a
 							class="dropdown-item" href="#">Update Informations</a> <a
-							class="dropdown-item" href="BetHistory.jsp">Bet Order Management</a> <a
-							class="dropdown-item" href="#">Top Up Your Account</a>
+							class="dropdown-item" href="BetHistory.jsp">Bet Order
+							Management</a> <a class="dropdown-item" href="#">Top Up Your
+							Account</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink"
@@ -135,16 +180,13 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="Team.jsp">Manchester United<%
 							session.setAttribute("team", 11);
-						%></a>
-						<a class="dropdown-item" href="Team.jsp">Manchester City<%
-							session.setAttribute("team", 10);
-						%></a>
-						<a class="dropdown-item" href="Team.jsp">Chelsea<%
-							session.setAttribute("team", 4);
-						%></a>
-						<a class="dropdown-item" href="Team.jsp">Arsenal<%
-							session.setAttribute("team", 2);
-						%></a>
+						%></a> <a class="dropdown-item" href="Team.jsp">Manchester City<%
+ 	session.setAttribute("team", 10);
+ %></a> <a class="dropdown-item" href="Team.jsp">Chelsea<%
+ 	session.setAttribute("team", 4);
+ %></a> <a class="dropdown-item" href="Team.jsp">Arsenal<%
+ 	session.setAttribute("team", 2);
+ %></a>
 					</div></li>
 			</ul>
 			<!-- Search -->
@@ -218,24 +260,6 @@
 					<form>
 						<%=session.getAttribute("matchHistory")%>
 					</form>
-				</div>
-				<div class="card-block">
-					<div class="text-xs-center" id="progress-caption-1">Proactively
-						Envisioned &hellip; 100%</div>
-					<progress class="progress progress-success" value="100" max="100"
-						aria-describedby="progress-caption-1"></progress>
-					<div class="text-xs-center" id="progress-caption-2">Objectively
-						Innovated &hellip; 80%</div>
-					<progress class="progress progress-info" value="80" max="100"
-						aria-describedby="progress-caption-2"></progress>
-					<div class="text-xs-center" id="progress-caption-3">Portalled
-						&hellip; 45%</div>
-					<progress class="progress progress-warning" value="45" max="100"
-						aria-describedby="progress-caption-3"></progress>
-					<div class="text-xs-center" id="progress-caption-4">Done
-						&hellip; 35%</div>
-					<progress class="progress progress-danger" value="35" max="100"
-						aria-describedby="progress-caption-4"></progress>
 				</div>
 			</div>
 		</div>

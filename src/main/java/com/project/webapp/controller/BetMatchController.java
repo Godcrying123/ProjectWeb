@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.project.webapp.domain.User;
 import com.project.webapp.domain.UserMatches;
@@ -38,15 +39,17 @@ public class BetMatchController extends HttpServlet {
 		this.betAmount = betAmount;
 		this.userDao = new UserDao();
 		this.user = new User();
+		this.betController = new BetController();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BetMatchController(HttpServletRequest request,
+	public BetMatchController(BetController betController, HttpServletRequest request,
 			HttpServletResponse response, UserDao userDao) {
 		this.request = request;
 		this.response = response;
 		this.userDao = userDao;
 		this.user = user;
+		this.betController = betController;
 	}
 
 	/**
@@ -60,9 +63,9 @@ public class BetMatchController extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String email = (String) request.getSession().getAttribute(
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute(
 				"emailValidate");
-		BetController betController = new BetController();
 		user = (User) userDao.search(email);
 
 		if (request.getParameter("betTeam1") != null) {
