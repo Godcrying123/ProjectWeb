@@ -22,13 +22,13 @@ public class MatchesController implements MatchesService {
 	private EntityManager em;
 	private MatchSchedule schedulematch;
 	private UserDao userDao;
-	private String[] startTimes = new String[7];
+	private String[] startTimes;
 
 	public MatchesController() {
 		this.em = datadao.getEm();
 		this.userDao = userDao;
 		this.schedulematch = schedulematch;
-		this.startTimes = startTimes;
+		this.startTimes = new String[7];
 
 	}
 
@@ -198,7 +198,7 @@ public class MatchesController implements MatchesService {
 		}
 	}
 
-	public Matches searchMatches(int Team, int match_week) {
+	public Matches searchMatchesByTeamIdAndMatchWeek(int Team, int match_week) {
 
 		Query query = this.em
 				.createQuery("from Matches as matches where matches.matchweek=?");

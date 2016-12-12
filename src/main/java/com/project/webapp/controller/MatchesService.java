@@ -29,4 +29,6 @@ public interface MatchesService {
 
 	public List<Team> teamList();
 
+	public Matches searchMatchesByTeamIdAndMatchWeek(int Team, int match_week);
+
 }

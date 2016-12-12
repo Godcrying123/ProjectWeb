@@ -46,8 +46,8 @@ public class TeamTest {
 	public void compareTest() {
 		// Arrange
 		Team team1 = new Team();
-		Team team2 = new Team(2, "Chelsea", "CH", 3, 58);
-		Team team3 = new Team(3, "Arsenal", "AR", 5, 49);
+		Team team2 = new Team(4, "Chelsea", "CH", 3, 58);
+		Team team3 = new Team(5, "Arsenal", "AR", 5, 49);
 		// Act
 		int compare = team1.compare(team2, team3);
 		// Assert
@@ -62,9 +62,11 @@ public class TeamTest {
 		List<Matches> matchList3 = new ArrayList<Matches>();
 		boolean index1 = false;
 		boolean index2 = false;
-		Team team = new Team(2, "Chelsea", "CH", 3, 58);
-		Matches matches1 = new Matches(1, 2, 5, 3, 0, 3, 1, 1.5, 2.5, 2.8, "17:00");
-		Matches matches2 = new Matches(1, 2, 5, 3, 0, 3, 1, 1.5, 2.5, 2.8, "17:00");
+		Team team = new Team(4, "Chelsea", "CH", 3, 58);
+		Matches matches1 = new Matches(1, 2, 5, 3, 0, 3, 1, 1.5, 2.5, 2.8,
+				"17:00");
+		Matches matches2 = new Matches(1, 2, 5, 3, 0, 3, 1, 1.5, 2.5, 2.8,
+				"17:00");
 		int index = 0;
 		// Act
 		team.addMatch(matches1);
@@ -73,7 +75,7 @@ public class TeamTest {
 		matchList2.add(matches1);
 		matchList2.add(matches2);
 		team.setMatchesList(matchList2);
-		matchList3= team.getMatchesList();
+		matchList3 = team.getMatchesList();
 		// Assert
 		if (matchList1.equals(matchList2)) {
 			index1 = true;
@@ -83,13 +85,13 @@ public class TeamTest {
 		}
 		assertEquals(index1, true);
 		assertEquals(index2, true);
-		
+
 	}
 
 	@Test
 	public void toStringTest() {
 		// Arrange
-		Team team = new Team(2, "Chelsea", "CH", 3, 58);
+		Team team = new Team(4, "Chelsea", "CH", 3, 58);
 		;
 		// Act
 		String out = "Team [team_id=2, teamname=Chelsea, score=58, points=3, matchesList=[]]";

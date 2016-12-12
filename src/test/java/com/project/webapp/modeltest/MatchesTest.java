@@ -79,8 +79,8 @@ public class MatchesTest {
 	public void TeamListTest() {
 		// Arrange
 		Matches matches = new Matches(1, 2, 5, 3, 0, 3, 1, 1.5, 2.5, 2.8, "17:00");
-		Team team1 = new Team(2, "Chelsea", "CH", 3, 58);
-		Team team2 = new Team(3, "Arsenal", "AR", 5, 49);
+		Team team1 = new Team(4,"Chelsea", "CH", 3, 58);
+		Team team2 = new Team(5,"Arsenal", "AR", 5, 49);
 		boolean index1 = false;
 		boolean index2 = false;
 		List<Team> teamList1 = new ArrayList<Team>();

@@ -16,7 +16,7 @@
 	StringBuffer matchBet = new StringBuffer();
 	for (int i = 19; i >= 1; i--) {
 		match_week = i;
-		matches = matchesController.searchMatches(11, match_week);
+		matches = matchesController.searchMatchesByTeamIdAndMatchWeek(11, match_week);
 		String bet = matches.getStartTime()+"	"+String.valueOf(i)+"th Week";
 		String homeTeam = matchesController.searchTeam(matches.getHometeam()).getTeamname();
 		String awayTeam = matchesController.searchTeam(matches.getAwayteam()).getTeamname();

@@ -32,8 +32,7 @@ public class Team implements Comparator<Team> {
 
 	}
 
-	public Team(int team_id, String teamname, String shortname, int points,
-			int score) {
+	public Team(int team_id, String teamname, String shortname, int points, int score) {
 		super();
 		this.team_id = team_id;
 		this.teamname = teamname;
@@ -98,8 +97,8 @@ public class Team implements Comparator<Team> {
 	@Override
 	public String toString() {
 		return "Team [team_id=" + team_id + ", teamname=" + teamname
-				+ ", score=" + score + ", points=" + points + ", matchesList="
-				+ matchesList + "]";
+				+ ", shortname=" + shortname + ", score=" + score + ", points="
+				+ points + ", matchesList=" + matchesList + "]";
 	}
 
 	public int compare(Team o1, Team o2) {
